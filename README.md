@@ -82,8 +82,8 @@ Clone the Repository:
 
 git clone https://github.com/Neerajramb/medical_assistant_project_v2.git
 cd medical_assistant_project_v2
-Create and Activate Virtual Environment:
 ```
+Create and Activate Virtual Environment:
 ```Bash
 
 python -m venv venv
