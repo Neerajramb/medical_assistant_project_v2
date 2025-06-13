@@ -89,7 +89,6 @@ Create and Activate Virtual Environment:
 python -m venv venv
 ```
 On Windows:
-```
 ```Bash
 
 .\venv\Scripts\activate
