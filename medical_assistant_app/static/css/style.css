@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+
+:root {
+    --bg-dark: #121212;
+    --bg-container: #1E1E1E;
+    --bg-input: #2A2A2A;
+    --primary-accent: #BB86FC;
+    --user-message-bg: #372948;
+    --assistant-message-bg: #2C2C2C;
+    --text-primary: #E1E1E1;
+    --text-secondary: #B3B3B3;
+    --border-color: #333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.chat-container {
+    background-color: var(--bg-container);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+/* --- MODIFIED HEADER SECTION --- */
+header {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* --- NEW RULES FOR THE CENTERED TITLE AND ACTIONS --- */
+.header-title {
+    color: var(--primary-accent);     /* The requested purple color */
+    font-family: 'Inter', sans-serif; /* Clean, minimalist font */
+    font-weight: 500;                 /* A softer, cleaner weight */
+    font-size: 1.25rem;
+    text-align: center;
+    flex-grow: 1;                     /* Allows the title to fill the middle space */
+}
+
+.header-actions, .header-placeholder {
+    width: 90px;      /* Gives the side elements a fixed width for balance */
+    flex-shrink: 0;   /* Prevents them from shrinking on smaller screens */
+}
+
+.header-actions {
+    text-align: right; /* Aligns the logout button to the far right */
+}
+/* --- END OF NEW HEADER RULES --- */
+
+.logout-button {
+    color: red;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+}
+
+.chat-box {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.message {
+    max-width: 75%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 1.2rem;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-message {
+    background-color: var(--user-message-bg);
+    color: var(--text-primary);
+    align-self: flex-end;
+    border-bottom-right-radius: 0.3rem;
+}
+
+.assistant-message {
+    background-color: var(--assistant-message-bg);
+    color: var(--text-primary);
+    align-self: flex-start;
+    border-bottom-left-radius: 0.3rem;
+}
+
+.chat-input-area {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-container);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#user-input {
+    flex: 1;
+    padding: 1rem;
+    background-color: var(--bg-input);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#user-input:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2);
+}
+
+#send-button {
+    padding: 0.8rem;
+    background-color: var(--primary-accent);
+    color: var(--bg-dark);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#send-button:hover {
+    background-color: #a25cf6;
+}
+
+#send-button:disabled {
+    background-color: var(--bg-input);
+    cursor: not-allowed;
+    transform: scale(1);
+}
+#send-button:disabled svg {
+    fill: var(--text-secondary);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Typing Indicator */
+.typing-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px; /* Matches line height */
+}
+.typing-dots span {
+    height: 8px;
+    width: 8px;
+    margin: 0 3px;
+    background-color: var(--text-secondary);
+    border-radius: 50%;
+    display: inline-block;
+    animation: typing-bounce 1.4s infinite ease-in-out both;
+}
+.typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+.typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+.typing-dots span:nth-child(3) { animation-delay: 0s; }
+
+@keyframes typing-bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  } 40% {
+    transform: scale(1.0);
+  }
+}

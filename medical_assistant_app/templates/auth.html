@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Medical Assistant</title>
+    <link rel="stylesheet" href="/static/css/auth.css">
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+    </script>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="form-container" id="login-container">
+            <form id="login-form">
+                <h2>Welcome Back</h2>
+                <p>Login to continue your session.</p>
+                <div class="input-group">
+                    <input type="email" id="login-email" required placeholder="Email">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="login-password" required placeholder="Password">
+                </div>
+                <button type="submit">Login</button>
+                <p class="error-message" id="login-error"></p>
+                <p class="toggle-link">New here? <a href="#" id="show-signup">Create an account</a></p>
+            </form>
+        </div>
+
+        <div class="form-container hidden" id="signup-container">
+            <form id="signup-form">
+                <h2>Create Account</h2>
+                <p>Join us to get personalized medical assistance.</p>
+                <div class="input-group">
+                    <input type="text" id="signup-name" required placeholder="Full Name">
+                </div>
+                <div class="input-group">
+                    <input type="email" id="signup-email" required placeholder="Email">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="signup-password" required placeholder="Password">
+                </div>
+                <button type="submit">Sign Up</button>
+                <p class="error-message" id="signup-error"></p>
+                <p class="toggle-link">Already a member? <a href="#" id="show-login">Login instead</a></p>
+            </form>
+        </div>
+        <div id="loading-overlay" class="hidden">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <script src="/static/js/auth.js"></script>
+</body>
+</html>
